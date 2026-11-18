@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="uZX9ElfanbjKOi9qkhTO6pN5-MXnA7yJfgDjXvDWjLw" />
-    <title>DUFLOT FRANCK - Mobile Application Development</title>
+    <title>DUFLOT FRANCK - Duflot Stopwatch: Lap Timer</title>
     <style>
         :root {
-            --primary: #2563eb;
+            --primary: #38bdf8;
+            --accent: #10b981;
             --dark: #0f172a;
-            --gray: #64748b;
-            --light: #f8fafc;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
-        header { background: white; border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        body { background-color: var(--dark); color: var(--text-light); line-height: 1.6; }
+        header { background: #0b1120; border-bottom: 1px solid var(--border); padding: 18px 0; position: sticky; top: 0; z-index: 100; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
         .nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--dark); text-decoration: none; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--text-light); text-decoration: none; }
         .logo span { color: var(--primary); }
-        .links a { margin-left: 20px; text-decoration: none; color: var(--gray); font-size: 0.95rem; font-weight: 500; }
+        .links a { margin-left: 20px; text-decoration: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .links a:hover { color: var(--primary); }
-        .hero { padding: 60px 0; text-align: center; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--dark); }
-        .hero p { font-size: 1.2rem; color: var(--gray); max-width: 650px; margin: 0 auto 30px; }
-        .card { background: white; border-radius: 12px; padding: 35px; border: 1px solid #e2e8f0; margin-bottom: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        h2 { font-size: 1.5rem; margin-bottom: 15px; color: var(--dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        h3 { font-size: 1.15rem; margin: 20px 0 10px; color: #1e293b; }
-        p, ul { color: #334155; margin-bottom: 15px; }
-        ul { padding-left: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .info-box { background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary); }
-        footer { background: var(--dark); color: #94a3b8; text-align: center; padding: 30px 0; margin-top: 60px; font-size: 0.9rem; }
+        .hero { padding: 50px 0 30px; text-align: center; }
+        .badge { display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; color: var(--text-light); }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .card { background: var(--card-bg); border-radius: 14px; padding: 30px; border: 1px solid var(--border); margin-bottom: 25px; }
+        h2 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        h3 { font-size: 1.1rem; margin: 18px 0 8px; color: var(--primary); }
+        p, ul { color: var(--text-muted); margin-bottom: 14px; font-size: 0.95rem; }
+        ul { padding-left: 22px; }
+        li { margin-bottom: 6px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+        .info-box { background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary); }
+        .info-box strong { color: var(--text-light); }
+        footer { background: #070b14; color: var(--text-muted); text-align: center; padding: 25px 0; margin-top: 50px; font-size: 0.85rem; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
@@ -40,9 +46,9 @@
         <div class="container nav">
             <a href="#" class="logo">DUFLOT <span>FRANCK</span></a>
             <div class="links">
-                <a href="#about">About</a>
+                <a href="#about">About App</a>
                 <a href="#privacy">Privacy Policy</a>
-                <a href="#legal">Mentions Légales</a>
+                <a href="#legal">Legal Notice</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
@@ -50,70 +56,76 @@
 
     <div class="container">
         <section class="hero">
-            <h1>Studio de Développement Mobile</h1>
-            <p>Conception et développement d'applications Android performantes, intuitives et sécurisées pour le Google Play Store.</p>
+            <span class="badge">Official Application</span>
+            <h1>Duflot Stopwatch: Lap Timer</h1>
+            <p>High-precision digital stopwatch, interval lap timer, and training history tracker designed for Android.</p>
         </section>
 
-        <!-- Company & Legal Info -->
-        <section id="legal" class="card">
-            <h2>Informations Légales de l'Entreprise</h2>
-            <div class="grid">
-                <div class="info-box">
-                    <strong>Raison Sociale :</strong> DUFLOT FRANCK<br>
-                    <strong>Responsable Légal :</strong> Franck Daniel Duflot<br>
-                    <strong>SIREN :</strong> 822 434 460
-                </div>
-                <div class="info-box">
-                    <strong>Numéro D-U-N-S® :</strong> 268937509<br>
-                    <strong>Adresse du Siège :</strong> 49 Avenue Garibaldi, 87000 Limoges, France<br>
-                    <strong>Activité :</strong> Édition de logiciels et applications mobiles
-                </div>
-            </div>
-        </section>
-
-        <!-- About Apps -->
+        <!-- About App -->
         <section id="about" class="card">
-            <h2>Nos Applications Mobiles</h2>
-            <p>Nous développons des outils multimédias, utilitaires et solutions de streaming légères optimisées pour smartphones, tablettes et télévisions connectées (Android TV).</p>
-            <p>Toutes nos applications respectent scrupuleusement les règles du programme pour les développeurs Google Play ainsi que la conformité RGPD européenne.</p>
+            <h2>About the Application</h2>
+            <p><strong>Duflot Stopwatch: Lap Timer</strong> is a clean, lightweight, and modern utility built for athletes, trainers, runners, students, and everyday productivity. It offers millisecond-accurate timing, lap split calculations, customizable countdown presets, and offline session history.</p>
+            <ul>
+                <li><strong>No Advertising:</strong> Enjoy a completely distraction-free experience with zero ads.</li>
+                <li><strong>100% Offline:</strong> Operates entirely on your local device without requiring an active internet connection.</li>
+                <li><strong>Zero Dangerous Permissions:</strong> Does not request access to your camera, microphone, storage, contacts, or location.</li>
+            </ul>
         </section>
 
         <!-- Privacy Policy -->
         <section id="privacy" class="card">
-            <h2>Politique de Confidentialité (Privacy Policy)</h2>
-            <p><em>Dernière mise à jour : Novembre 2026</em></p>
-            <p>La présente Politique de Confidentialité s'applique à l'ensemble des applications mobiles éditées par <strong>DUFLOT FRANCK</strong> sur Google Play.</p>
+            <h2>Privacy Policy</h2>
+            <p><em>Effective Date: November 2026</em></p>
+            <p>This Privacy Policy applies to the mobile application <strong>Duflot Stopwatch: Lap Timer</strong> developed and published by <strong>DUFLOT FRANCK</strong>.</p>
             
-            <h3>1. Collecte et Utilisation des Données</h3>
-            <p>Nos applications sont conçues pour minimiser au maximum la collecte de données personnelles. Nous ne collectons aucune information directement identifiable (tel que votre nom ou votre localisation exacte) sans votre consentement explicite.</p>
-            
-            <h3>2. Services Tiers</h3>
-            <p>Nos applications peuvent intégrer des services tiers fiables nécessaires au fonctionnement et à l'analyse de performance :</p>
+            <h3>1. Information Collection and Use</h3>
+            <p>We respect your privacy. <strong>Duflot Stopwatch: Lap Timer does NOT collect, store, transmit, or share any personal data or personally identifiable information (PII).</strong> All stopwatch data, lap times, countdown durations, and session logs remain strictly stored on your local device memory.</p>
+
+            <h3>2. Third-Party Services and SDKs</h3>
+            <p>The application does not integrate any third-party analytics trackers, advertising networks, or data brokers. It operates independently as a standalone offline utility.</p>
+
+            <h3>3. Device Permissions</h3>
+            <p>The app only uses normal, non-dangerous system hardware capabilities required for its core functionality:</p>
             <ul>
-                <li><strong>Google Play Services</strong> (gestion du compte et des services Google)</li>
-                <li><strong>Google AdMob</strong> (diffusion d'annonces publicitaires adaptées)</li>
-                <li><strong>Firebase Analytics & Crashlytics</strong> (diagnostic technique des pannes et amélioration de la stabilité)</li>
+                <li><strong>Vibration (Haptic Feedback):</strong> Provides tactile response when pressing buttons and alerts when a timer finishes.</li>
             </ul>
 
-            <h3>3. Sécurité des Données</h3>
-            <p>Nous mettons en œuvre toutes les mesures techniques raisonnables pour protéger les données techniques transmises contre la perte, le vol ou l'accès non autorisé.</p>
+            <h3>4. Children's Privacy</h3>
+            <p>Our application is suitable for general audiences of all ages and does not knowingly collect any data from children.</p>
 
-            <h3>4. Vos Droits (Conformité RGPD)</h3>
-            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression des données techniques vous concernant.</p>
+            <h3>5. GDPR & Compliance</h3>
+            <p>In full compliance with the European General Data Protection Regulation (GDPR) and Google Play Developer Program Policies, no user tracking or profiling occurs.</p>
+        </section>
+
+        <!-- Legal Notice -->
+        <section id="legal" class="card">
+            <h2>Company & Legal Notice</h2>
+            <div class="grid">
+                <div class="info-box">
+                    <strong>Company:</strong> DUFLOT FRANCK<br>
+                    <strong>Legal Representative:</strong> Franck Daniel Duflot<br>
+                    <strong>SIREN:</strong> 822 434 460
+                </div>
+                <div class="info-box">
+                    <strong>D-U-N-S® Number:</strong> 268937509<br>
+                    <strong>Headquarters:</strong> 49 Avenue Garibaldi, 87000 Limoges, France<br>
+                    <strong>Activity:</strong> Mobile Application Development
+                </div>
+            </div>
         </section>
 
         <!-- Contact -->
         <section id="contact" class="card">
             <h2>Contact & Support</h2>
-            <p>Pour toute question concernant nos applications mobiles ou notre politique de confidentialité, vous pouvez nous contacter :</p>
-            <p><strong>Email Support :</strong> franckduflot.contact@gmail.com</p>
-            <p><strong>Adresse Postale :</strong> 49 AV GARIBALDI, 87000 LIMOGES, FRANCE</p>
+            <p>If you have any questions or feedback regarding <strong>Duflot Stopwatch: Lap Timer</strong> or this Privacy Policy, please contact us:</p>
+            <p><strong>Email:</strong> franckduflot.contact@gmail.com</p>
+            <p><strong>Address:</strong> 49 AV GARIBALDI, 87000 LIMOGES, FRANCE</p>
         </section>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 DUFLOT FRANCK. Tous droits réservés.</p>
+            <p>&copy; 2026 DUFLOT FRANCK. All rights reserved.</p>
         </div>
     </footer>
 
